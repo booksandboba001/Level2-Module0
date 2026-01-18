@@ -13,20 +13,26 @@ public class _00_ArrayCheatSheet {
 		str[4] = "and You'll be on my mind.";
 		str[5] = "I also like splatoon music, but we're not getting into that right now";
 		int smallest=100;
+		int largest = 0;
 		for(int i =1; i<6; i++) {
 			System.out.println(str[i]);
 		}
 		Integer[] toomany = new Integer[51];
 		for (int i = 50;i>0; i--) {
 			toomany[i] = rand;
-			rand = ran.nextInt(1000);
+			rand = ran.nextInt(101);
 			if(rand<smallest) {
 				smallest=rand;
 				toomany[i]=smallest;
 			}
-			System.out.println(toomany[i]);
+			if(rand>largest) {
+				largest = rand;
+				toomany[i]=largest;
+				
+			}
 		}
 		System.out.println(smallest);
+		System.out.println(largest);
 		//1. make an array of 5 Strings
 		
 		//2. print the third element in the array
