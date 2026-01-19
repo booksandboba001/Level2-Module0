@@ -20,6 +20,7 @@ public class _02_FindTheHiddenButton implements ActionListener{
 	JPanel panel;
 	JButton[] array;
 	int hiddenButton;
+	int numClicked;
 	//1. create an array of JButtons. Don't initialize it yet.
 	
 	//2 create an int variable called hiddenButton
@@ -43,18 +44,23 @@ public class _02_FindTheHiddenButton implements ActionListener{
 		window.add(panel);
 		window.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		window.setVisible(true);
-		JOptionPane.showMessageDialog(null, "For one eigth of a second, the hidden button will reveal itself, then hide again. Your goal is to remember where it is and click on it!");
+		JOptionPane.showMessageDialog(null, "For 0.06% of a second, seven hidden buttons will reveal themselves (they'll say 'ME'), then hide again.");
+		JOptionPane.showMessageDialog(null, "The only thing is, the first six are fakes. Your goal is to remember where the last one is and click on it!");
 		Random ran = new Random();
-		int rand = ran.nextInt(num);
-		hiddenButton = rand;
-		array[hiddenButton].setText("ME");
-		try {
-			Thread.sleep(180);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		int rand;
+		
+		for (int i =7; i >0;i--) {
+			rand = ran.nextInt(num);
+			hiddenButton = rand;
+			array[hiddenButton].setText("ME");
+			try {
+				Thread.sleep(180);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			array[hiddenButton].setText("");
 		}
-		array[hiddenButton].setText("");
 		//3.  Ask the user to enter a positive number and convert it to an int
 		
 		//4. Initialize the array of JButtons to be the size of the int created in step 3
@@ -87,9 +93,17 @@ public class _02_FindTheHiddenButton implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		JButton buttonClicked = (JButton)e.getSource();
 		if (buttonClicked==array[hiddenButton]) {
-			JOptionPane.showMessageDialog(null, "You win!");
+			JOptionPane.showMessageDialog(null, "You win! It took you "+numClicked+" extra tries.");
+			
+			
 		}else {
 			JOptionPane.showMessageDialog(null, "Try Again");
+			numClicked++;
+			
+		}
+		if(numClicked>=10) {
+			JOptionPane.showMessageDialog(null,"You ran out of tries!");
+			
 		}
 		//17. if the hiddenButton is clicked, tell the user that they win.
 		
